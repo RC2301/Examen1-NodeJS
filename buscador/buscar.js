@@ -1,6 +1,5 @@
 const csv = require('csv-parser');
 const fs = require('fs');
-const http = require('http');
 const colors = require("colors")
 let datosCSV = [];
 let resultado = [];
@@ -32,8 +31,7 @@ const leerDatos = (path, cod, year, guardar) => {
                 return 1;
             }
             if (guardar === 1) {
-                imprimirPorCon(data, cod, year);
-                imprimirPorWeb(data, cod, year);
+                imprimir(data, cod, year);
                 guardar = 0;
             }
             if (guardar === undefined || guardar === true) {
@@ -264,79 +262,14 @@ const topCinco = (datos, year) => {
     return result;
 
 }
-
-
-const imprimirPorCon = (datos, cod, year) => {
-    let pais = datos.find(obj => obj.codigo_ciudad === cod);
-    MoM = resultado[3].MayorOMenor;
-    me = resultado[0].mediaMundial;
-    top = resultado[4].top5;
-    porD = resultado[2].PorDebajo;
-    porE = resultado[1].PorEncima;
-    console.log("===============================================".magenta);
-    console.log("=========IMPRIMIENDO DATOS POR CONSOLA=========".magenta);
-    console.log("===============================================".magenta);
-    console.log();
-    console.log("****SUSCRIPCIONES DE TELEFONÍA CELULAR MOVÍL****".green);
-    console.log("-------------------------------------------------------------------------".magenta);
-    console.log(`La media de suscripciones de todos los países en el año ${year} es: ${me}`.yellow);
-    console.log("-------------------------------------------------------------------------".magenta);
-    console.log(MoM.yellow);
-    console.log("=========================================================================".magenta);
-    console.log(`Países por Encima del país ${cod} - ${pais.nombre_ciudad}, Año ${year}`.bgWhite.black);
-
-    if (porE == false) {
-        console.log("No hay datos".red);
-    } else {
-        for (const key in porE) {
-            if (porE[key] == undefined || porE[key].suma == 0) {
-
-            } else {
-                console.log(`País: ${porE[key].nombre.green}`);
-                console.log(`Suscripciones: ${porE[key].suma}`.yellow);
-                console.log("");
-            }
-
-        }
-    }
-    console.log("======================================================================".magenta);
-    console.log(`Países por Debajo del país ${cod} - ${pais.nombre_ciudad}, Año ${year}`.bgWhite.black);
-    if (porD == false) {
-        console.log("No hay datos".red);
-    } else {
-        for (const key in porD) {
-            if (porD[key] == undefined || porD[key].suma == 0) {
-
-            } else {
-                console.log(`País: ${porD[key].nombre.green}`);
-                console.log(`Suscripciones: ${porD[key].suma}`.yellow);
-                console.log("");
-            }
-
-        }
-    }
-
-    console.log("======================================================================".magenta);
-    console.log(`Top 5 países del año ${year}`.bgGreen.black);
-    if (top[0].dato == 0) {
-        console.log("No hay datos".red);
-    } else {
-        for (const key in top) {
-            if (top[key] == undefined || top[key].dato == 0) {
-
-            } else {
-                console.log(`País: ${top[key].nombre.green}`);
-                console.log(`Suscripciones: ${top[key].dato}`.yellow);
-                console.log("");
-            }
-
-        }
-    }
-
+const imprimir = (data, cod, year) => {
+    pais = data.find(obj => obj.codigo_ciudad == cod);
+    console.log("======================================================================".black.bgWhite);
+    console.log("Datos: Personas que usan Internet (% de la población)".green.bgRed);
+    console.log(`Pais: ${pais.nombre_ciudad}`.random);
+    console.log(`Año: ${year}`.random);
+    console.log(`Valor: ${resultado[0].valor}`.random);
+    console.log("======================================================================".black.bgWhite);
 }
-
-
-
-
 
 module.exports = { leerDatos }
