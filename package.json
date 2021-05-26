@@ -1,0 +1,26 @@
+{
+  "name": "examen1",
+  "version": "1.0.0",
+  "description": "Examen del primer parcial de Plataformas Web",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RC2301/Examen1-NodeJS.git"
+  },
+  "author": "Richard Camacho",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RC2301/Examen1-NodeJS/issues"
+  },
+  "homepage": "https://github.com/RC2301/Examen1-NodeJS#readme",
+  "dependencies": {
+    "colors": "^1.4.0",
+    "yargs": "^17.0.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
+}
